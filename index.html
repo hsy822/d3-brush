@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>bar-snapping</title>
+  <meta charset="UTF-8">
+</head>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+
+<style>
+  .bar {
+    fill: steelblue;
+  }
+
+  .bar:hover {
+    fill: red
+  }
+</style>
+
+<body>
+  <svg width="960" height="500"></svg>
+  <div>
+    <table>
+      <tbody id='table-body'>
+      </tbody>
+    </table>
+  </div>
+  <script>
+    var svg = d3.select("svg"),
+        width = svg.attr("width")
+        height = svg.attr("height")
+
+    var x = d3.scaleTime()
+    var y = d3.scaleLinear().rangeRound([height, 0]);
+
+    var g = svg.append("g")
+
+    var brush = d3.brushX().extent([
+      [0, 0],
+      [width, height]
+    ]).on("end", brushed);
+
+    d3.tsv("data/data.tsv", function(d) {
+      d.frequency = +d.frequency;
+      return d;
+    }, function(error, data) {
+      if (error) throw error;
+
+      x.domain([new Date(data[0].date), new Date(data[data.length - 1].date) - 1])
+        .rangeRound([0, width])
+
+      y.domain([0, d3.max(data, function(d) {
+        return d.frequency;
+      })]);
+
+      g.append("g")
+        .attr("class", "axis axis--x")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x)
+          .ticks(d3.timeDay)
+          .tickPadding(0))
+
+      g.append("g")
+        .attr("class", "axis axis--y")
+        .call(d3.axisLeft(y).ticks(10))
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", "0.71em")
+        .attr("text-anchor", "end")
+        .text("Frequency");
+
+      g.selectAll(".bar")
+        .data(data)
+        .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", function(d) {
+          return x(new Date(d.date));
+        })
+        .attr("y", function(d) {
+          return y(d.frequency);
+        })
+        .attr("width", width / data.length)
+        .attr("height", function(d) {
+          return height - y(d.frequency);
+        });
+
+      g.append("g")
+        .attr("class", "brush")
+        .call(brush)
+        .call(brush.move, x.range());
+
+    })
+
+    function brushed() {
+      if (!d3.event.sourceEvent) return; // Only transition after input.
+      if (!d3.event.selection) return; // Ignore empty selections.
+
+      document.getElementById("table-body").innerHTML = ''
+
+      var d0 = d3.event.selection.map(x.invert),
+        d1 = d0.map(d3.timeDay.round);
+
+      // If empty when rounded, use floor & ceil instead.
+      if (d1[0] >= d1[1]) {
+        d1[0] = d3.timeDay.floor(d0[0]);
+        d1[1] = d3.timeDay.offset(d1[0]);
+      }
+
+      var selection = chooseSelection(d3.event.selection[0], d3.event.selection[1])
+
+      var tr, tdDate, txtDate, tdPrice, txtPrice
+
+      Array.from(selection).forEach(function(arr) {
+        tr = document.createElement('TR')
+
+        tdDate = document.createElement('TD')
+        txtDate = document.createTextNode(arr.date)
+        tdDate.appendChild(txtDate)
+
+        tdPrice = document.createElement('TD')
+        txtPrice = document.createTextNode(arr.frequency)
+        tdPrice.appendChild(txtPrice)
+
+        tr.appendChild(tdDate)
+        tr.appendChild(tdPrice)
+
+        document.getElementById("table-body").appendChild(tr)
+      })
+
+      d3.select(this).transition().call(d3.event.target.move, d1.map(x));
+    }
+
+    function chooseSelection(start, end) {
+
+      var arr = []
+
+      d3.selectAll(".bar").each(function(el) {
+        var position = this.x.animVal.value
+        if (position >= start && position <= end) {
+          arr.push(el)
+        }
+      })
+      console.log(arr)
+      return arr
+
+    }
+  </script>
+</body>
+
+</html>
