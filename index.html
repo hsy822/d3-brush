@@ -2,24 +2,72 @@
 <html>
 
 <head>
-  <title>bar-snapping</title>
+  <title>D3-brush</title>
   <meta charset="UTF-8">
 </head>
 <script src="https://d3js.org/d3.v4.min.js"></script>
 
 <style>
-  .bar {
-    fill: steelblue;
-  }
+.bar {
+  fill: #51cfa0;
+}
 
-  .bar:hover {
-    fill: red
-  }
+.bar:hover {
+  fill: red
+}
+
+.hover-box {
+  width: 200px;
+  height: 100px;
+  background-color: #eee;
+  border-radius: .225rem;
+  border: 1px solid #ccc;
+  position: relative;
+}
+
+.hover-box::after {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: #eee;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  position: absolute;
+  bottom: -6px;
+  left: 20px;
+  transform: rotate(45deg);
+}
+
+.container {
+  display: inline-block;
+  height: 300px;
+  overflow-y: auto;
+}
+
+table, td {
+  background-color: #eee;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #ccc;
+  color: #565656;
+}
+
+td {
+  padding: .3rem 1rem;
+}
+
+td:nth-child(2){
+  width: 4rem;
+  background-color: #fff;
+  text-align: center;
+}
+
 </style>
 
 <body>
-  <svg width="960" height="500"></svg>
-  <div>
+  <svg width="600" height="300"></svg>
+  <div class="container">
     <table>
       <tbody id='table-body'>
       </tbody>
@@ -31,27 +79,27 @@
         height = svg.attr("height")
 
     var x = d3.scaleTime()
-    var y = d3.scaleLinear().rangeRound([height, 0]);
+    var y = d3.scaleLinear().rangeRound([height, 0])
 
     var g = svg.append("g")
 
     var brush = d3.brushX().extent([
       [0, 0],
       [width, height]
-    ]).on("end", brushed);
+    ]).on("end", brushed)
 
     d3.tsv("data/data.tsv", function(d) {
-      d.frequency = +d.frequency;
+      d.price = +d.price
       return d;
     }, function(error, data) {
-      if (error) throw error;
+      if (error) throw error
 
       x.domain([new Date(data[0].date), new Date(data[data.length - 1].date) - 1])
         .rangeRound([0, width])
 
       y.domain([0, d3.max(data, function(d) {
-        return d.frequency;
-      })]);
+        return d.price
+      })])
 
       g.append("g")
         .attr("class", "axis axis--x")
@@ -68,43 +116,43 @@
         .attr("y", 6)
         .attr("dy", "0.71em")
         .attr("text-anchor", "end")
-        .text("Frequency");
+        .text("price")
 
       g.selectAll(".bar")
         .data(data)
         .enter().append("rect")
         .attr("class", "bar")
         .attr("x", function(d) {
-          return x(new Date(d.date));
+          return x(new Date(d.date))
         })
         .attr("y", function(d) {
-          return y(d.frequency);
+          return y(d.price)
         })
         .attr("width", width / data.length)
         .attr("height", function(d) {
-          return height - y(d.frequency);
+          return height - y(d.price)
         });
 
       g.append("g")
         .attr("class", "brush")
         .call(brush)
-        .call(brush.move, x.range());
+        // .call(brush.move, x.range())
 
     })
 
     function brushed() {
-      if (!d3.event.sourceEvent) return; // Only transition after input.
-      if (!d3.event.selection) return; // Ignore empty selections.
+      if (!d3.event.sourceEvent) return // Only transition after input.
+      if (!d3.event.selection) return // Ignore empty selections.
 
       document.getElementById("table-body").innerHTML = ''
 
       var d0 = d3.event.selection.map(x.invert),
-        d1 = d0.map(d3.timeDay.round);
+        d1 = d0.map(d3.timeDay.round)
 
       // If empty when rounded, use floor & ceil instead.
       if (d1[0] >= d1[1]) {
-        d1[0] = d3.timeDay.floor(d0[0]);
-        d1[1] = d3.timeDay.offset(d1[0]);
+        d1[0] = d3.timeDay.floor(d0[0])
+        d1[1] = d3.timeDay.offset(d1[0])
       }
 
       var selection = chooseSelection(d3.event.selection[0], d3.event.selection[1])
@@ -119,7 +167,7 @@
         tdDate.appendChild(txtDate)
 
         tdPrice = document.createElement('TD')
-        txtPrice = document.createTextNode(arr.frequency)
+        txtPrice = document.createTextNode(arr.price)
         tdPrice.appendChild(txtPrice)
 
         tr.appendChild(tdDate)
@@ -128,7 +176,7 @@
         document.getElementById("table-body").appendChild(tr)
       })
 
-      d3.select(this).transition().call(d3.event.target.move, d1.map(x));
+      d3.select(this).transition().call(d3.event.target.move, d1.map(x))
     }
 
     function chooseSelection(start, end) {
@@ -141,7 +189,7 @@
           arr.push(el)
         }
       })
-      console.log(arr)
+
       return arr
 
     }
