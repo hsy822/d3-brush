@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>bitcoin</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device--width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/style-2.css">
+  </head>
+  <body>
+    <div class="ly-header flex row">
+      <div class="header-logo">LOGO</div>
+      <div class="header-user">USER</div>
+    </div>
+    <div class="ly-content">
+      <main class="content"></main>
+      <div class="snb-left" id="snbLeft" >
+        <div class="snb-title">
+          <ul class="snb-nav-btn-list">
+            <li><button onclick="toggleSnbLeft()">menu</button></li>
+            <li><a>비트코인</a></li>
+            <li><a>이더리움</a></li>
+            <li><a>대시</a></li>
+            <li><a>라이트코인</a></li>
+            <li><a>이더리움</a></li>
+            <li><a>리플</a></li>            
+          </ul>
+        </div>
+        <div class="snb-content">
+          <div class="tab">
+            <ul class="tab-nav-btn-list flex row">
+              <li><a>거래현황</a></li>
+              <li><a>거래추적</a></li>
+              <li><a>등록거래</a></li>
+              <li><a>의심거래</a></li>              
+            </ul>
+            <div class="tab-nav-page-list">
+              <div class="tab-nav-page active">
+                <div class="tab-title">거래현황</div>
+                <div class="tab-content">
+                  <div class="tab-sub-content active">비트코인거래현황</div>
+                  <div class="tab-sub-content">이더리움거래현황</div>
+                  <div class="tab-sub-content">대시거래현황</div>
+                  <div class="tab-sub-content">라이트코인거래현황</div>
+                  <div class="tab-sub-content">이더리움거래현황</div>
+                  <div class="tab-sub-content">리플거래현황</div>
+                </div>
+              </div>
+              <div class="tab-nav-page">
+                  <div class="tab-title">거래추적</div>
+                  <div class="tab-content"></div>
+              </div>
+              <div class="tab-nav-page">
+                <div class="tab-title">등록거래</div>
+                <div class="tab-content"></div>
+              </div>
+              <div class="tab-nav-page">
+                <div class="tab-title">의심거래</div>
+                <div class="tab-content"></div>
+              </div>             
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ly-footer">
+
+    </div>
+
+    <script >
+
+      let a = document.querySelectorAll('.tab-nav-btn-list li a');
+      let div = document.querySelectorAll('.tab-nav-page');
+
+      for(let i=0; i<a.length; i++){        
+        a[i].addEventListener('click',  (e) => {          
+          e.preventDefault();          
+          for(let j=0; j<div.length; j++){
+            div[j].classList.toggle('active', i === j);
+          }
+        });
+      }
+
+      let b = document.querySelectorAll('.snb-nav-btn-list a');
+      let sub = document.querySelectorAll('.tab-sub-content');
+
+      for(let i=0; i<b.length; i++){        
+        b[i].addEventListener('click',  (e) => {          
+          e.preventDefault();          
+          for(let j=0; j<sub.length; j++){
+            sub[j].classList.toggle('active', i === j);
+          }
+        });
+      }
+
+      function toggleSnbLeft() {
+        let left = document.querySelectorAll('.snb-left .snb-content')
+        for(let p of left) {
+          p.classList.toggle('active');
+        }
+      }
+
+
+           
+     
+    </script>
+  </body>
+</html>

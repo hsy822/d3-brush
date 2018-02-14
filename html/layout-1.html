@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+      <title>bitcoin</title>
+      <meta charset="UTF-8">
+      <link rel="stylesheet" type="text/css" href="../css/style-1.css">
+   </head>
+   <body>
+      <div class="ly-header flex">
+        <div class="header-logo">LOGO</div>
+        <div class="header-user">USER</div>
+      </div>
+      <div class="ly-body flex">
+         <nav>
+            <ul class="nav-list">
+               <li><a>관리자페이지</a></li>
+               <li><a>거래현황</a></li>
+               <li><a>거래추적</a></li>
+               <li><a>등록거래</a></li>
+               <li><a>의심거래</a></li>              
+            </ul>
+         </nav>
+         <div class="content">
+            <div class="content-head">
+               <ul class="content-head-list flex">
+                  <li><a>비트코인</a></li>
+                  <li><a>이더리움</a></li>
+                  <li><a>대시</a></li>
+                  <li><a>라이트코인</a></li>
+                  <li><a>이더리움클래식</a></li>
+                  <li><a>리플</a></li>
+               </ul>
+            </div>
+            <div class="content-body">
+               <div class="content-body-page active">관리자페이지</div>
+               <div class="content-body-page">거래현황
+                  <div class="content-body-subpage active">
+                        <div class="page-title">비트코인</div>
+                  </div>
+                  <div class="content-body-subpage">
+                        <div class="page-title">이더리움</div>
+                  </div>
+                  <div class="content-body-subpage">
+                        <div class="page-title">대시</div>
+                  </div> 
+                  <div class="content-body-subpage">
+                        <div class="page-title">라이트코인</div>
+                  </div> 
+                  <div class="content-body-subpage">
+                        <div class="page-title">이더리움클래식</div>
+                  </div> 
+                  <div class="content-body-subpage">
+                        <div class="page-title">리플</div>
+                  </div>                 
+               </div>
+               <div class="content-body-page">거래추적</div>
+               <div class="content-body-page">등록거래</div>
+               <div class="content-body-page">의심거래</div>
+            </div>
+         </div>         
+      </div>
+
+      <div class="ly-footer"></div>
+  
+      <script>
+  
+        let a = document.querySelectorAll('.nav-list li a');
+        let div = document.querySelectorAll('.content-body-page');
+  
+        for(let i=0; i<a.length; i++){        
+          a[i].addEventListener('click',  (e) => {          
+            e.preventDefault();          
+            for(let j=0; j<div.length; j++){
+              div[j].classList.toggle('active', i === j);
+            }
+          });
+        }
+
+        let b = document.querySelectorAll('.content-head-list a');
+        let page = document.querySelectorAll('.content-body-subpage');
+  
+        for(let i=0; i<b.length; i++){        
+          b[i].addEventListener('click',  (e) => {          
+            e.preventDefault();          
+            for(let j=0; j<page.length; j++){
+               page[j].classList.toggle('active', i === j);
+            }
+          });
+        }
+  
+       
+  
+             
+       
+      </script>
+    </body>
+</html>
