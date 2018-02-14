@@ -1,4 +1,3 @@
-# bitcoin
-bitcoin layout
+# Layout A, Layout B, D3 Bar-chart with Brush
 
-example https://bugman002.github.io/bitcoin/
+example  https://hsy822.github.io/d3-brush
