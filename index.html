@@ -1,93 +1,13 @@
 <!DOCTYPE HTML>
 <html>
-
 <head>
-  <title>D3-brush</title>
+  <title>bitcoin</title>
   <meta charset="UTF-8">
 </head>
-<script src="https://d3js.org/d3.v4.min.js"></script>
-
-<style>
-.bar {
-  fill: #51cfa0;
-}
-
-.bar:hover {
-  fill: red
-}
-
-.hover-box {
-  width: 200px;
-  height: 100px;
-  background-color: #eee;
-  border-radius: .225rem;
-  border: 1px solid #ccc;
-  position: relative;
-}
-
-.hover-box::after {
-  content: '';
-  display: block;
-  width: 10px;
-  height: 10px;
-  background-color: #eee;
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-  position: absolute;
-  bottom: -6px;
-  left: 20px;
-  transform: rotate(45deg);
-}
-
-.container {
-  display: inline-block;
-  height: 300px;
-  overflow-y: auto;
-}
-
-table, td {
-  background-color: #eee;
-  border-collapse: collapse;
-  border-spacing: 0;
-  border: 1px solid #ccc;
-  color: #565656;
-}
-
-td {
-  padding: .3rem 1rem;
-}
-
-td:nth-child(2){
-  width: 4rem;
-  background-color: #fff;
-  text-align: center;
-}
-
-</style>
-
 <body>
-
-  <div id='brushWidget'>
-  </div>
-
-  <div class="container">
-    <table>
-      <tbody id='table-body'>
-      </tbody>
-    </table>
-  </div>
-
-<script src="js/brush-widget.js"></script>
-
-<script>
-  window.addEventListener('load', ()=>{
-    var bw = new BrushWidget('#brushWidget', {
-      timeColumn : 'timestamp',  //x축 (날짜, 시간)
-      dataColumn : 'price'  //y축 (TX count, price...)
-    })
-  })
-</script>
-
+  <a href="html/layout-1.html">시안1</a>
+  <a href="html/layout-2.html">시안2</a>
+  <br/><br/>
+  <a href="html/d3.html">d3</a>
 </body>
-
 </html>
