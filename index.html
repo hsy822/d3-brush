@@ -66,134 +66,28 @@ td:nth-child(2){
 </style>
 
 <body>
-  <svg width="600" height="300"></svg>
+
+  <div id='brushWidget'>
+  </div>
+
   <div class="container">
     <table>
       <tbody id='table-body'>
       </tbody>
     </table>
   </div>
-  <script>
-    var svg = d3.select("svg"),
-        width = svg.attr("width")
-        height = svg.attr("height")
 
-    var x = d3.scaleTime()
-    var y = d3.scaleLinear().rangeRound([height, 0])
+<script src="js/brush-widget.js"></script>
 
-    var g = svg.append("g")
-
-    var brush = d3.brushX().extent([
-      [0, 0],
-      [width, height]
-    ]).on("end", brushed)
-
-    d3.tsv("data/data.tsv", function(d) {
-      d.price = +d.price
-      return d;
-    }, function(error, data) {
-      if (error) throw error
-
-      x.domain([new Date(data[0].date), new Date(data[data.length - 1].date) - 1])
-        .rangeRound([0, width])
-
-      y.domain([0, d3.max(data, function(d) {
-        return d.price
-      })])
-
-      g.append("g")
-        .attr("class", "axis axis--x")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x)
-          .ticks(d3.timeDay)
-          .tickPadding(0))
-
-      g.append("g")
-        .attr("class", "axis axis--y")
-        .call(d3.axisLeft(y).ticks(10))
-        .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 6)
-        .attr("dy", "0.71em")
-        .attr("text-anchor", "end")
-        .text("price")
-
-      g.selectAll(".bar")
-        .data(data)
-        .enter().append("rect")
-        .attr("class", "bar")
-        .attr("x", function(d) {
-          return x(new Date(d.date))
-        })
-        .attr("y", function(d) {
-          return y(d.price)
-        })
-        .attr("width", width / data.length)
-        .attr("height", function(d) {
-          return height - y(d.price)
-        });
-        
-      g.append("g")
-        .attr("class", "brush")
-        .call(brush)
-        // .call(brush.move, x.range())
-
+<script>
+  window.addEventListener('load', ()=>{
+    var bw = new BrushWidget('#brushWidget', {
+      timeColumn : 'timestamp',  //x축 (날짜, 시간)
+      dataColumn : 'price'  //y축 (TX count, price...)
     })
+  })
+</script>
 
-    function brushed() {
-      if (!d3.event.sourceEvent) return // Only transition after input.
-      if (!d3.event.selection) return // Ignore empty selections.
-
-      document.getElementById("table-body").innerHTML = ''
-
-      var d0 = d3.event.selection.map(x.invert),
-        d1 = d0.map(d3.timeDay.round)
-
-      // If empty when rounded, use floor & ceil instead.
-      if (d1[0] >= d1[1]) {
-        d1[0] = d3.timeDay.floor(d0[0])
-        d1[1] = d3.timeDay.offset(d1[0])
-      }
-
-      var selection = chooseSelection(d3.event.selection[0], d3.event.selection[1])
-
-      var tr, tdDate, txtDate, tdPrice, txtPrice
-
-      Array.from(selection).forEach(function(arr) {
-        tr = document.createElement('TR')
-
-        tdDate = document.createElement('TD')
-        txtDate = document.createTextNode(arr.date)
-        tdDate.appendChild(txtDate)
-
-        tdPrice = document.createElement('TD')
-        txtPrice = document.createTextNode(arr.price)
-        tdPrice.appendChild(txtPrice)
-
-        tr.appendChild(tdDate)
-        tr.appendChild(tdPrice)
-
-        document.getElementById("table-body").appendChild(tr)
-      })
-
-      d3.select(this).transition().call(d3.event.target.move, d1.map(x))
-    }
-
-    function chooseSelection(start, end) {
-
-      var arr = []
-
-      d3.selectAll(".bar").each(function(el) {
-        var position = this.x.animVal.value
-        if (position >= start && position <= end) {
-          arr.push(el)
-        }
-      })
-
-      return arr
-
-    }
-  </script>
 </body>
 
 </html>
