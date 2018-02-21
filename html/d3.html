@@ -76,14 +76,16 @@ td:nth-child(2){
       </tbody>
     </table>
   </div>
-
 <script src="../js/brush-widget.js"></script>
 
 <script>
   window.addEventListener('load', ()=>{
     var bw = new BrushWidget('#brushWidget', {
       timeColumn : 'timestamp',  //x축 (날짜, 시간)
-      dataColumn : 'price'  //y축 (TX count, price...)
+      dataColumn : 'price',  //y축 (거래량, 체결가격...)
+      allDataSec : 300000, //x축에 표시할 전체 데이터의 시간 범위 ms
+      barDataSec : 5000 //bar 하나가 나타내는 시간 단위 ms
+     // brushWidth : 500
     })
   })
 </script>
