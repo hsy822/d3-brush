@@ -28,7 +28,6 @@ function BrushWidget(id, options){
 
       if (error) throw error
 
-      console.log(data)
 
       var dataset = dataSet(data, timeInfo)
 
@@ -44,7 +43,9 @@ function BrushWidget(id, options){
       // y.domain([0, d3.max(data, function(d) {
       //   return d[dataColumn]
       // })])
-
+      g.on('click', function(){
+        var coords = d3.mouse(this);
+      })
       g.append("g")
         .attr("class", "axis axis--x")
         .attr("transform", "translate(0," + height + ")")
@@ -68,13 +69,32 @@ function BrushWidget(id, options){
         .attr("width", width / dataset.length)
         .attr("height", function(d) {
           return height - y(d[dataColumn])
-        });
+        })
 
       g.append("g")
         .attr("class", "brush")
         .call(brush)
+        .call(brush.move, [width/2 , width])
+        .append("line")
+        .attr("class", 'line')
+        .attr("x1", width/2)
+        .attr("y1", 0)
+        .attr("x2", width/2)
+        .attr("y2", height)
+        .style("stroke-width", 3)
+        .style("stroke", "red")
+        .style("fill", "none");
         // .call(brush.move, x.range())
+
+      var t = d3.transition()
+          .duration(2000)
+          .ease(d3.easeLinear)
+
+      d3.selectAll(".line").transition(t)
+        .attr("x1", width)
+        .attr("x2", width)
   })
+
 
   function dataSet(data, timeInfo){
 
@@ -134,7 +154,6 @@ function BrushWidget(id, options){
       }
     })
 
-    console.log(dataSec)
 
     return dataSec
   }
@@ -155,7 +174,7 @@ function BrushWidget(id, options){
     //   d1[0] = d3.timeSecond.floor(d0[0])
     //   d1[1] = d3.timeSecond.offset(d1[0])
     // }
-
+    console.log(d3.event.selection[0], d3.event.selection[1])
     var selection = chooseSelection(d3.event.selection[0], d3.event.selection[1])
 
     var tr, tdDate, txtDate, tdPrice, txtPrice
@@ -185,6 +204,8 @@ function BrushWidget(id, options){
     var arr = []
 
     d3.selectAll(".bar").each(function(el) {
+
+
       var position = this.x.animVal.value
       if (position >= start && position <= end) {
         arr.push(el)
