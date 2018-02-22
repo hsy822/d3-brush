@@ -1,8 +1,11 @@
 function BrushWidget(id, options){
 
   //특정 영역 지정할 수 있도록
-  id = id.replace('#', '')
-  document.getElementById(id).innerHTML = '<svg width="600" height="300"></svg>'
+  var id = id.replace('#', '')
+  document.getElementById(id).innerHTML = '<svg width="1200" height="100"></svg>'
+
+  //brushSizeSec
+  var brushSize = +options.brushSize
 
   //timeColumn(x축), dataColumn(y축)에 표시될 컬럼 지정 옵션
   var timeColumn = options.timeColumn,
@@ -28,7 +31,6 @@ function BrushWidget(id, options){
 
       if (error) throw error
 
-
       var dataset = dataSet(data, timeInfo)
 
       x.domain([dataset[dataset.length - 1][timeColumn], dataset[0][timeColumn]])
@@ -43,9 +45,8 @@ function BrushWidget(id, options){
       // y.domain([0, d3.max(data, function(d) {
       //   return d[dataColumn]
       // })])
-      g.on('click', function(){
-        var coords = d3.mouse(this);
-      })
+
+
       g.append("g")
         .attr("class", "axis axis--x")
         .attr("transform", "translate(0," + height + ")")
@@ -70,31 +71,38 @@ function BrushWidget(id, options){
         .attr("height", function(d) {
           return height - y(d[dataColumn])
         })
-
       g.append("g")
         .attr("class", "brush")
         .call(brush)
-        .call(brush.move, [width/2 , width])
-        .append("line")
-        .attr("class", 'line')
-        .attr("x1", width/2)
-        .attr("y1", 0)
-        .attr("x2", width/2)
-        .attr("y2", height)
-        .style("stroke-width", 3)
-        .style("stroke", "red")
-        .style("fill", "none");
-        // .call(brush.move, x.range())
+        // .call(brush.move, [0 , width])
 
-      var t = d3.transition()
-          .duration(2000)
-          .ease(d3.easeLinear)
-
-      d3.selectAll(".line").transition(t)
-        .attr("x1", width)
-        .attr("x2", width)
+      g.on('click', function(){
+        g.selectAll('line').remove()
+      })
   })
 
+  function selectRange(from, to){
+      g.selectAll('line').remove()
+
+      g.append("g")
+      .attr("class", "brush").append("line")
+      .attr("x1", from)
+      .attr("y1", 0)
+      .attr("x2", from)
+      .attr("y2", height)
+      .style("stroke-width", 3)
+      .style("stroke", "red")
+      .style("fill", "none");
+      // .call(brush.move, x.range())
+
+    var t = d3.transition()
+        .duration(2000)
+        .ease(d3.easeLinear)
+
+    d3.selectAll("line").transition(t)
+      .attr("x1", to)
+      .attr("x2", to)
+  }
 
   function dataSet(data, timeInfo){
 
@@ -197,6 +205,8 @@ function BrushWidget(id, options){
     })
 
     d3.select(this).transition().call(d3.event.target.move, d0.map(x))
+
+    selectRange(d3.event.selection[0], d3.event.selection[1])
   }
 
   function chooseSelection(start, end){
@@ -204,7 +214,6 @@ function BrushWidget(id, options){
     var arr = []
 
     d3.selectAll(".bar").each(function(el) {
-
 
       var position = this.x.animVal.value
       if (position >= start && position <= end) {

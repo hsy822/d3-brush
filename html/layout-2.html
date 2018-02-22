@@ -3,66 +3,9 @@
   <head>
     <title>bitcoin</title>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/style-2.css">
     <script src="https://d3js.org/d3.v4.min.js"></script>
   </head>
-  <style>
-  .bar {
-    fill: #51cfa0;
-  }
-
-  .bar:hover {
-    fill: red
-  }
-
-  .hover-box {
-    width: 200px;
-    height: 100px;
-    background-color: #eee;
-    border-radius: .225rem;
-    border: 1px solid #ccc;
-    position: relative;
-  }
-
-  .hover-box::after {
-    content: '';
-    display: block;
-    width: 10px;
-    height: 10px;
-    background-color: #eee;
-    border-right: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    position: absolute;
-    bottom: -6px;
-    left: 20px;
-    transform: rotate(45deg);
-  }
-
-  .container {
-    display: inline-block;
-    height: 300px;
-    overflow-y: auto;
-  }
-
-  table, td {
-    background-color: #eee;
-    border-collapse: collapse;
-    border-spacing: 0;
-    border: 1px solid #ccc;
-    color: #565656;
-  }
-
-  td {
-    padding: .3rem 1rem;
-  }
-
-  td:nth-child(2){
-    width: 4rem;
-    background-color: #fff;
-    text-align: center;
-  }
-  </style>
   <body>
     <div class="ly-header flex row">
       <div class="header-logo">LOGO</div>
@@ -118,17 +61,20 @@
           </div>
         </div>
       </div>
+      <div class="snb-right">
+          <table>
+            <tbody id='table-body'>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
-    <div class="container">
-      <table>
-        <tbody id='table-body'>
-        </tbody>
-      </table>
-    </div>
+
     <div class="ly-footer">
       <div id="brushWidget">
-
       </div>
+      <button style="position: absolute; right: 50px; top: 20px;" name='selectRange' id='selectRange'>selectRange()
+      </button>
     </div>
     <script src="../js/brush-widget.js"></script>
     <script>
@@ -138,7 +84,8 @@
           timeColumn : 'timestamp',  //x축 (날짜, 시간)
           dataColumn : 'price',  //y축 (거래량, 체결가격...)
           allDataSec : 300000, //x축에 표시할 전체 데이터의 시간 범위 ms
-          barDataSec : 5000 //bar 하나가 나타내는 시간 단위 ms
+          barDataSec : 5000, //bar 하나가 나타내는 시간 단위 ms
+          brushSize : 6 //brush(선택구간)안에 들어갈 bar의 개수
         })
       })
 
