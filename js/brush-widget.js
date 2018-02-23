@@ -1,8 +1,5 @@
 function BrushWidget(id, options){
 
-  d3.select('body')
-    .selectAll('p')
-
   //특정 영역 지정할 수 있도록
   var id = id.replace('#', '')
   document.getElementById(id).innerHTML = '<svg width="1200" height="100"></svg>'
@@ -37,7 +34,7 @@ function BrushWidget(id, options){
       var dataset = dataSet(data, timeInfo)
 
       x.domain([dataset[dataset.length - 1][timeColumn], dataset[0][timeColumn]])
-        .rangeRound([0, width])
+        .range([0, width])
 
       y.domain([d3.min(dataset, function(d){
          return d[dataColumn]
@@ -45,19 +42,20 @@ function BrushWidget(id, options){
         return d[dataColumn]
       })])
 
+      console.log(y)
       // y.domain([0, d3.max(data, function(d) {
       //   return d[dataColumn]
       // })])
 
-      g.append("g")
-        .attr("class", "axis axis--x")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x))
+      // g.append("g")
+      //   .attr("class", "axis axis--x")
+      //   .attr("transform", "translate(0," + height + ")")
+      //   .call(d3.axisBottom(x))
 
-      g.append("g")
-        .attr("class", "axis axis--y")
-        .call(d3.axisLeft(y))
-        .append("text")
+      // g.append("g")
+      //   .attr("class", "axis axis--y")
+      //   .call(d3.axisLeft(y))
+      //   .append("text")
 
       g.selectAll(".bar")
         .data(dataset)
@@ -83,9 +81,7 @@ function BrushWidget(id, options){
         g.selectAll('line').remove()
 
         var position = d3.mouse(this)
-
         var barWidth = g.select('.bar').style('width')
-
         barWidth = barWidth.replace(/[a-z]/gi,"")
 
         g.select('.brush')
@@ -114,7 +110,6 @@ function BrushWidget(id, options){
       .attr("x1", to)
       .attr("x2", to)
 
-    console.log(d3.selectAll("line"))
   }
 
   function dataSet(data, timeInfo){

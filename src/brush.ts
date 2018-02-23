@@ -6,7 +6,7 @@ const defaultOption = {
     context: document.querySelector('body') ,
     timeColumn: 'timestamp',
     dataColumn: 'value',
-    wholeTimeRange: 1, // 분단위
+    wholeTimeRange: 5, // 분단위
     selectRange: 30, // 초단위
     barRange: 5, // 초단위
     rangeSelectedHandler: ()=>{},
@@ -57,11 +57,68 @@ export class Brush {
         this.xAxis = d3.axisBottom(this.xScale);
         this.xAxisG = this.svg.append('g').attr("transform", `translate(0,${this.height-20})`);
 
+        // 그래프를 초기화 한다.
+        this.initGraph()
+
+        // 5초에 한번씩 데이터를 가져온다.
         this.option.dataSource.subscribe((data)=>{
             console.log(data)
+            let now = Date.now()
+            this.animate5Sec(now)
         });
 
         // this.startXisAnimation();
+    }
+
+    initGraph() {
+
+      let now = Date.now()
+
+      var xs = this.xScale,
+          xa = this.xAxis,
+          xag = this.xAxisG
+
+      var key = Math.floor(now/(5*1000))
+
+      //xScale을 만든다.
+      xs.domain([key-60,key])
+      xag.call(xa)
+
+      //현재 기준으로 데이터를 가져온다.
+      var dataSet = this.option.dataSource.getWholeData()
+
+      var y = this.yScale
+      var x = this.xScale
+
+      var h = this.height
+      var w = this.width
+
+      //가져온 데이터를 이용하여, yScale을 만든다.
+      y = d3.scaleLinear().rangeRound([h, 0])
+                      .domain([d3.min(dataSet, function(d){return d['value']}),
+                               d3.max(dataSet, function(d){return d['value']})])
+
+      // //bar 그래프로 표시한다.
+      var g = this.svg.append('g').attr('class', 'barChart').attr("transform", `translate(-20, -20)`)
+
+       g.selectAll(".bar")
+        .data(dataSet)
+        .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", function(d){
+          return x(d['key'])
+        })
+        .attr("y", function(d) {
+          return y(d['value'])
+        })
+        .attr("width", w / dataSet.length)
+        .attr("height", function(d) {
+          return h - y(d['value'])
+        })
+
+      //brush를 적용한다.
+
+
     }
 
     animate5Sec(now) {
@@ -99,7 +156,3 @@ export class Brush {
     }
 
 }
-
-
-
-

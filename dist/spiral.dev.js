@@ -61,7 +61,7 @@ var AG_spiral =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 578);
+/******/ 	return __webpack_require__(__webpack_require__.s = 577);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -94,7 +94,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 178:
+/***/ 177:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -653,7 +653,7 @@ function Link(fromId, toId, data, id) {
 
 /***/ }),
 
-/***/ 179:
+/***/ 178:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -662,7 +662,7 @@ function Link(fromId, toId, data, id) {
 
 module.exports = domInputManager;
 
-var dragndrop = __webpack_require__(180);
+var dragndrop = __webpack_require__(179);
 
 function domInputManager(graph, graphics) {
   var nodeEvents = {};
@@ -707,7 +707,7 @@ function domInputManager(graph, graphics) {
 
 /***/ }),
 
-/***/ 180:
+/***/ 179:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -716,9 +716,9 @@ function domInputManager(graph, graphics) {
 
 module.exports = dragndrop;
 
-var documentEvents = __webpack_require__(270);
-var browserInfo = __webpack_require__(272);
-var findElementPosition = __webpack_require__(273);
+var documentEvents = __webpack_require__(269);
+var browserInfo = __webpack_require__(271);
+var findElementPosition = __webpack_require__(272);
 
 // TODO: Move to input namespace
 // TODO: Methods should be extracted into the prototype. This class
@@ -995,7 +995,7 @@ function dragndrop(element) {
 
 /***/ }),
 
-/***/ 181:
+/***/ 180:
 /***/ (function(module, exports) {
 
 module.exports = exposeProperties;
@@ -1046,7 +1046,7 @@ function augment(source, target, key) {
 
 /***/ }),
 
-/***/ 182:
+/***/ 181:
 /***/ (function(module, exports) {
 
 module.exports = parseColor;
@@ -1075,10 +1075,10 @@ function parseColor(color) {
 
 /***/ }),
 
-/***/ 183:
+/***/ 182:
 /***/ (function(module, exports, __webpack_require__) {
 
-var parseColor = __webpack_require__(182);
+var parseColor = __webpack_require__(181);
 
 module.exports = webglSquare;
 
@@ -1106,16 +1106,16 @@ function webglSquare(size, color) {
 
 /***/ }),
 
-/***/ 184:
+/***/ 183:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = svg;
 
-svg.compile = __webpack_require__(607);
+svg.compile = __webpack_require__(606);
 
-var compileTemplate = svg.compileTemplate = __webpack_require__(609);
+var compileTemplate = svg.compileTemplate = __webpack_require__(608);
 
-var domEvents = __webpack_require__(610);
+var domEvents = __webpack_require__(609);
 
 var svgns = "http://www.w3.org/2000/svg";
 var xlinkns = "http://www.w3.org/1999/xlink";
@@ -1319,7 +1319,7 @@ function validateSubject(subject) {
 
 /***/ }),
 
-/***/ 268:
+/***/ 267:
 /***/ (function(module, exports) {
 
 module.exports = intersect;
@@ -1425,10 +1425,10 @@ function intersect(
 
 /***/ }),
 
-/***/ 269:
+/***/ 268:
 /***/ (function(module, exports, __webpack_require__) {
 
-var documentEvents = __webpack_require__(270);
+var documentEvents = __webpack_require__(269);
 
 module.exports = webglInputEvents;
 
@@ -1690,10 +1690,10 @@ function webglInputEvents(webglGraphics) {
 
 /***/ }),
 
-/***/ 270:
+/***/ 269:
 /***/ (function(module, exports, __webpack_require__) {
 
-var nullEvents = __webpack_require__(271);
+var nullEvents = __webpack_require__(270);
 
 module.exports = createDocumentEvents();
 
@@ -1719,7 +1719,7 @@ function off(eventName, handler) {
 
 /***/ }),
 
-/***/ 271:
+/***/ 270:
 /***/ (function(module, exports) {
 
 module.exports = createNullEvents();
@@ -1737,7 +1737,7 @@ function noop() { }
 
 /***/ }),
 
-/***/ 272:
+/***/ 271:
 /***/ (function(module, exports) {
 
 module.exports = browserInfo();
@@ -1771,7 +1771,7 @@ function browserInfo() {
 
 /***/ }),
 
-/***/ 273:
+/***/ 272:
 /***/ (function(module, exports) {
 
 /**
@@ -1795,7 +1795,7 @@ function findElementPosition(obj) {
 
 /***/ }),
 
-/***/ 274:
+/***/ 273:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -1804,7 +1804,7 @@ function findElementPosition(obj) {
 
 module.exports = webglInputManager;
 
-var createInputEvents = __webpack_require__(269);
+var createInputEvents = __webpack_require__(268);
 
 function webglInputManager(graph, graphics) {
     var inputEvents = createInputEvents(graphics),
@@ -1871,7 +1871,7 @@ function webglInputManager(graph, graphics) {
 
 /***/ }),
 
-/***/ 275:
+/***/ 274:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {/**
@@ -1971,7 +1971,7 @@ function noop() {}
 
 /***/ }),
 
-/***/ 276:
+/***/ 275:
 /***/ (function(module, exports) {
 
 module.exports = getDimension;
@@ -1998,11 +1998,11 @@ function getDimension(container) {
 
 /***/ }),
 
-/***/ 277:
+/***/ 276:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = createLayout;
-module.exports.simulator = __webpack_require__(278);
+module.exports.simulator = __webpack_require__(277);
 
 var eventify = __webpack_require__(22);
 
@@ -2019,7 +2019,7 @@ function createLayout(graph, physicsSettings) {
     throw new Error('Graph structure cannot be undefined');
   }
 
-  var createSimulator = __webpack_require__(278);
+  var createSimulator = __webpack_require__(277);
   var physicsSimulator = createSimulator(physicsSettings);
 
   var nodeBodies = Object.create(null);
@@ -2371,7 +2371,7 @@ function noop() { }
 
 /***/ }),
 
-/***/ 278:
+/***/ 277:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -2380,8 +2380,8 @@ function noop() { }
 module.exports = physicsSimulator;
 
 function physicsSimulator(settings) {
-  var Spring = __webpack_require__(592);
-  var expose = __webpack_require__(181);
+  var Spring = __webpack_require__(591);
+  var expose = __webpack_require__(180);
   var merge = __webpack_require__(41);
   var eventify = __webpack_require__(22);
 
@@ -2423,12 +2423,12 @@ function physicsSimulator(settings) {
   });
 
   // We allow clients to override basic factory methods:
-  var createQuadTree = settings.createQuadTree || __webpack_require__(593);
-  var createBounds = settings.createBounds || __webpack_require__(597);
-  var createDragForce = settings.createDragForce || __webpack_require__(598);
-  var createSpringForce = settings.createSpringForce || __webpack_require__(599);
-  var integrate = settings.integrator || __webpack_require__(600);
-  var createBody = settings.createBody || __webpack_require__(601);
+  var createQuadTree = settings.createQuadTree || __webpack_require__(592);
+  var createBounds = settings.createBounds || __webpack_require__(596);
+  var createDragForce = settings.createDragForce || __webpack_require__(597);
+  var createSpringForce = settings.createSpringForce || __webpack_require__(598);
+  var integrate = settings.integrator || __webpack_require__(599);
+  var createBody = settings.createBody || __webpack_require__(600);
 
   var bodies = [], // Bodies in this simulation.
       springs = [], // Springs in this simulation.
@@ -2645,7 +2645,7 @@ function physicsSimulator(settings) {
 
 /***/ }),
 
-/***/ 279:
+/***/ 278:
 /***/ (function(module, exports) {
 
 module.exports = Rect;
@@ -2663,7 +2663,7 @@ function Rect (x1, y1, x2, y2) {
 
 /***/ }),
 
-/***/ 280:
+/***/ 279:
 /***/ (function(module, exports) {
 
 module.exports = Texture;
@@ -2681,10 +2681,10 @@ function Texture(size) {
 
 /***/ }),
 
-/***/ 281:
+/***/ 280:
 /***/ (function(module, exports, __webpack_require__) {
 
-var Texture = __webpack_require__(280);
+var Texture = __webpack_require__(279);
 
 module.exports = webglAtlas;
 
@@ -2890,7 +2890,7 @@ function isPowerOf2(n) {
 
 /***/ }),
 
-/***/ 282:
+/***/ 281:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -3053,7 +3053,7 @@ function webglLinkProgram() {
 
 /***/ }),
 
-/***/ 283:
+/***/ 282:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -3223,10 +3223,10 @@ function webglNodeProgram() {
 
 /***/ }),
 
-/***/ 284:
+/***/ 283:
 /***/ (function(module, exports, __webpack_require__) {
 
-var parseColor = __webpack_require__(182);
+var parseColor = __webpack_require__(181);
 
 module.exports = webglLine;
 
@@ -3249,7 +3249,7 @@ function webglLine(color) {
 
 /***/ }),
 
-/***/ 285:
+/***/ 284:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -3260,9 +3260,9 @@ function webglLine(color) {
 
 module.exports = svgGraphics;
 
-var svg = __webpack_require__(184);
+var svg = __webpack_require__(183);
 var eventify = __webpack_require__(22);
-var domInputManager = __webpack_require__(179);
+var domInputManager = __webpack_require__(178);
 
 /**
  * Performs svg-based graph rendering. This module does not perform
@@ -3742,23 +3742,23 @@ function merge(target, options) {
 
 /***/ }),
 
-/***/ 578:
+/***/ 577:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(579);
+module.exports = __webpack_require__(578);
 
 
 /***/ }),
 
-/***/ 579:
+/***/ 578:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Viva = __webpack_require__(580);
-var webglSquare = __webpack_require__(183);
-const webglNodeProgram_1 = __webpack_require__(613);
+var Viva = __webpack_require__(579);
+var webglSquare = __webpack_require__(182);
+const webglNodeProgram_1 = __webpack_require__(612);
 console.log(Viva);
 class Spiral {
     constructor() {
@@ -3780,7 +3780,7 @@ exports.Spiral = Spiral;
 
 /***/ }),
 
-/***/ 580:
+/***/ 579:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -3804,73 +3804,73 @@ var Viva = {
 };
 
 Viva.Graph = {
-  version: __webpack_require__(581),
-  graph: __webpack_require__(178),
+  version: __webpack_require__(580),
+  graph: __webpack_require__(177),
 
   serializer: function() {
     return {
-      loadFromJSON: __webpack_require__(582),
-      storeToJSON: __webpack_require__(583)
+      loadFromJSON: __webpack_require__(581),
+      storeToJSON: __webpack_require__(582)
     };
   },
 
-  centrality: __webpack_require__(584),
-  operations: __webpack_require__(588),
+  centrality: __webpack_require__(583),
+  operations: __webpack_require__(587),
 
   geom: function() {
     return {
-      intersect: __webpack_require__(268),
-      intersectRect: __webpack_require__(589)
+      intersect: __webpack_require__(267),
+      intersectRect: __webpack_require__(588)
     };
   },
 
   webgl: __webpack_require__(62),
-  webglInputEvents: __webpack_require__(269),
+  webglInputEvents: __webpack_require__(268),
 
   generator: function() {
-    return __webpack_require__(590);
+    return __webpack_require__(589);
   },
 
   Input: {
-    domInputManager: __webpack_require__(179),
-    webglInputManager: __webpack_require__(274)
+    domInputManager: __webpack_require__(178),
+    webglInputManager: __webpack_require__(273)
   },
 
   Utils: {
     // TODO: move to Input
-    dragndrop: __webpack_require__(180),
-    findElementPosition: __webpack_require__(273),
-    timer: __webpack_require__(275),
-    getDimension: __webpack_require__(276),
-    events: __webpack_require__(591)
+    dragndrop: __webpack_require__(179),
+    findElementPosition: __webpack_require__(272),
+    timer: __webpack_require__(274),
+    getDimension: __webpack_require__(275),
+    events: __webpack_require__(590)
   },
 
   Layout: {
-    forceDirected: __webpack_require__(277),
-    constant: __webpack_require__(603)
+    forceDirected: __webpack_require__(276),
+    constant: __webpack_require__(602)
   },
 
   View: {
     // TODO: Move `webglXXX` out to webgl namespace
-    Texture: __webpack_require__(280),
+    Texture: __webpack_require__(279),
     // TODO: This should not be even exported
-    webglAtlas: __webpack_require__(281),
-    webglImageNodeProgram: __webpack_require__(604),
-    webglLinkProgram: __webpack_require__(282),
-    webglNodeProgram: __webpack_require__(283),
-    webglLine: __webpack_require__(284),
-    webglSquare: __webpack_require__(183),
-    webglImage: __webpack_require__(605),
-    webglGraphics: __webpack_require__(606),
+    webglAtlas: __webpack_require__(280),
+    webglImageNodeProgram: __webpack_require__(603),
+    webglLinkProgram: __webpack_require__(281),
+    webglNodeProgram: __webpack_require__(282),
+    webglLine: __webpack_require__(283),
+    webglSquare: __webpack_require__(182),
+    webglImage: __webpack_require__(604),
+    webglGraphics: __webpack_require__(605),
     // TODO: Deprecate this:
     _webglUtil: {
-      parseColor: __webpack_require__(182)
+      parseColor: __webpack_require__(181)
     },
 
     // TODO: move to svg namespace
-    svgGraphics: __webpack_require__(285),
+    svgGraphics: __webpack_require__(284),
 
-    renderer: __webpack_require__(611),
+    renderer: __webpack_require__(610),
 
     // deprecated
     cssGraphics: function() {
@@ -3886,12 +3886,12 @@ Viva.Graph = {
     }
   },
 
-  Rect: __webpack_require__(279),
+  Rect: __webpack_require__(278),
 
-  svg: __webpack_require__(184),
+  svg: __webpack_require__(183),
 
   // TODO: should be camelCase
-  BrowserInfo: __webpack_require__(272)
+  BrowserInfo: __webpack_require__(271)
 };
 
 module.exports = Viva;
@@ -3899,7 +3899,7 @@ module.exports = Viva;
 
 /***/ }),
 
-/***/ 581:
+/***/ 580:
 /***/ (function(module, exports) {
 
 // todo: this should be generated at build time.
@@ -3908,12 +3908,12 @@ module.exports = '0.8.1';
 
 /***/ }),
 
-/***/ 582:
+/***/ 581:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = load;
 
-var createGraph = __webpack_require__(178);
+var createGraph = __webpack_require__(177);
 
 function load(jsonGraph, nodeTransform, linkTransform) {
   var stored;
@@ -3958,7 +3958,7 @@ function id(x) { return x; }
 
 /***/ }),
 
-/***/ 583:
+/***/ 582:
 /***/ (function(module, exports) {
 
 module.exports = save;
@@ -4019,10 +4019,10 @@ function save(graph, customNodeTransform, customLinkTransform) {
 
 /***/ }),
 
-/***/ 584:
+/***/ 583:
 /***/ (function(module, exports, __webpack_require__) {
 
-var centrality = __webpack_require__(585);
+var centrality = __webpack_require__(584);
 
 module.exports = centralityWrapper;
 
@@ -4062,16 +4062,16 @@ function toVivaGraphCentralityFormat(centrality) {
 
 /***/ }),
 
-/***/ 585:
+/***/ 584:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports.degree = __webpack_require__(586);
-module.exports.betweenness = __webpack_require__(587);
+module.exports.degree = __webpack_require__(585);
+module.exports.betweenness = __webpack_require__(586);
 
 
 /***/ }),
 
-/***/ 586:
+/***/ 585:
 /***/ (function(module, exports) {
 
 module.exports = degree;
@@ -4137,7 +4137,7 @@ function inoutDegreeCalculator(links) {
 
 /***/ }),
 
-/***/ 587:
+/***/ 586:
 /***/ (function(module, exports) {
 
 module.exports = betweennes;
@@ -4254,7 +4254,7 @@ function betweennes(graph, oriented) {
 
 /***/ }),
 
-/***/ 588:
+/***/ 587:
 /***/ (function(module, exports) {
 
 /**
@@ -4294,10 +4294,10 @@ function operations() {
 
 /***/ }),
 
-/***/ 589:
+/***/ 588:
 /***/ (function(module, exports, __webpack_require__) {
 
-var intersect = __webpack_require__(268);
+var intersect = __webpack_require__(267);
 
 module.exports = intersectRect;
 
@@ -4311,7 +4311,7 @@ function intersectRect(left, top, right, bottom, x1, y1, x2, y2) {
 
 /***/ }),
 
-/***/ 590:
+/***/ 589:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
@@ -4327,7 +4327,7 @@ module.exports = {
   wattsStrogatz: wattsStrogatz
 };
 
-var createGraph = __webpack_require__(178);
+var createGraph = __webpack_require__(177);
 
 function ladder(n) {
 /**
@@ -4617,7 +4617,7 @@ function wattsStrogatz(n, k, p, seed) {
 
 /***/ }),
 
-/***/ 591:
+/***/ 590:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -4667,7 +4667,7 @@ function backwardCompatibleEvents(g) {
 
 /***/ }),
 
-/***/ 592:
+/***/ 591:
 /***/ (function(module, exports) {
 
 module.exports = Spring;
@@ -4688,7 +4688,7 @@ function Spring(fromBody, toBody, length, coeff, weight) {
 
 /***/ }),
 
-/***/ 593:
+/***/ 592:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -4705,9 +4705,9 @@ module.exports = function(options) {
 
   // we require deterministic randomness here
   var random = __webpack_require__(40).random(1984),
-    Node = __webpack_require__(594),
-    InsertStack = __webpack_require__(595),
-    isSamePosition = __webpack_require__(596);
+    Node = __webpack_require__(593),
+    InsertStack = __webpack_require__(594),
+    isSamePosition = __webpack_require__(595);
 
   var gravity = options.gravity,
     updateQueue = [],
@@ -5022,7 +5022,7 @@ function setChild(node, idx, child) {
 
 /***/ }),
 
-/***/ 594:
+/***/ 593:
 /***/ (function(module, exports) {
 
 /**
@@ -5059,7 +5059,7 @@ module.exports = function Node() {
 
 /***/ }),
 
-/***/ 595:
+/***/ 594:
 /***/ (function(module, exports) {
 
 module.exports = InsertStack;
@@ -5108,7 +5108,7 @@ function InsertStackElement(node, body) {
 
 /***/ }),
 
-/***/ 596:
+/***/ 595:
 /***/ (function(module, exports) {
 
 module.exports = function isSamePosition(point1, point2) {
@@ -5121,7 +5121,7 @@ module.exports = function isSamePosition(point1, point2) {
 
 /***/ }),
 
-/***/ 597:
+/***/ 596:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = function (bodies, settings) {
@@ -5208,7 +5208,7 @@ module.exports = function (bodies, settings) {
 
 /***/ }),
 
-/***/ 598:
+/***/ 597:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -5220,7 +5220,7 @@ module.exports = function (bodies, settings) {
  */
 module.exports = function (options) {
   var merge = __webpack_require__(41),
-      expose = __webpack_require__(181);
+      expose = __webpack_require__(180);
 
   options = merge(options, {
     dragCoeff: 0.02
@@ -5242,7 +5242,7 @@ module.exports = function (options) {
 
 /***/ }),
 
-/***/ 599:
+/***/ 598:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -5256,7 +5256,7 @@ module.exports = function (options) {
 module.exports = function (options) {
   var merge = __webpack_require__(41);
   var random = __webpack_require__(40).random(42);
-  var expose = __webpack_require__(181);
+  var expose = __webpack_require__(180);
 
   options = merge(options, {
     springCoeff: 0.0002,
@@ -5299,7 +5299,7 @@ module.exports = function (options) {
 
 /***/ }),
 
-/***/ 600:
+/***/ 599:
 /***/ (function(module, exports) {
 
 /**
@@ -5351,10 +5351,10 @@ function integrate(bodies, timeStep) {
 
 /***/ }),
 
-/***/ 601:
+/***/ 600:
 /***/ (function(module, exports, __webpack_require__) {
 
-var physics = __webpack_require__(602);
+var physics = __webpack_require__(601);
 
 module.exports = function(pos) {
   return new physics.Body(pos);
@@ -5363,7 +5363,7 @@ module.exports = function(pos) {
 
 /***/ }),
 
-/***/ 602:
+/***/ 601:
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -5435,14 +5435,14 @@ Vector3d.prototype.reset = function () {
 
 /***/ }),
 
-/***/ 603:
+/***/ 602:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = constant;
 
 var merge = __webpack_require__(41);
 var random = __webpack_require__(40).random;
-var Rect = __webpack_require__(279);
+var Rect = __webpack_require__(278);
 
 /**
  * Does not really perform any layouting algorithm but is compliant
@@ -5639,7 +5639,7 @@ function constant(graph, userSettings) {
 
 /***/ }),
 
-/***/ 604:
+/***/ 603:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -5649,7 +5649,7 @@ function constant(graph, userSettings) {
  * @author Andrei Kashcha (aka anvaka) / http://anvaka.blogspot.com
  */
 
-var WebglAtlas = __webpack_require__(281);
+var WebglAtlas = __webpack_require__(280);
 var glUtils = __webpack_require__(62);
 
 module.exports = webglImageNodeProgram;
@@ -5908,7 +5908,7 @@ function createNodeVertexShader() {
 
 /***/ }),
 
-/***/ 605:
+/***/ 604:
 /***/ (function(module, exports) {
 
 module.exports = webglImage;
@@ -5945,7 +5945,7 @@ function webglImage(size, src) {
 
 /***/ }),
 
-/***/ 606:
+/***/ 605:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -5956,11 +5956,11 @@ function webglImage(size, src) {
 
 module.exports = webglGraphics;
 
-var webglInputManager = __webpack_require__(274);
-var webglLinkProgram = __webpack_require__(282);
-var webglNodeProgram = __webpack_require__(283);
-var webglSquare = __webpack_require__(183);
-var webglLine = __webpack_require__(284);
+var webglInputManager = __webpack_require__(273);
+var webglLinkProgram = __webpack_require__(281);
+var webglNodeProgram = __webpack_require__(282);
+var webglSquare = __webpack_require__(182);
+var webglLine = __webpack_require__(283);
 var eventify = __webpack_require__(22);
 var merge = __webpack_require__(41);
 
@@ -6538,11 +6538,11 @@ function webglGraphics(options) {
 
 /***/ }),
 
-/***/ 607:
+/***/ 606:
 /***/ (function(module, exports, __webpack_require__) {
 
-var parser = __webpack_require__(608);
-var svg = __webpack_require__(184);
+var parser = __webpack_require__(607);
+var svg = __webpack_require__(183);
 
 module.exports = compile;
 
@@ -6571,7 +6571,7 @@ function addNamespaces(text) {
 
 /***/ }),
 
-/***/ 608:
+/***/ 607:
 /***/ (function(module, exports) {
 
 module.exports = createDomparser();
@@ -6592,7 +6592,7 @@ function fail() {
 
 /***/ }),
 
-/***/ 609:
+/***/ 608:
 /***/ (function(module, exports) {
 
 module.exports = template;
@@ -6691,7 +6691,7 @@ function bindTextContent(element, allBindings) {
 
 /***/ }),
 
-/***/ 610:
+/***/ 609:
 /***/ (function(module, exports) {
 
 addEventListener.removeEventListener = removeEventListener
@@ -6744,7 +6744,7 @@ function oldIEDetach(el, eventName, listener, useCapture) {
 
 /***/ }),
 
-/***/ 611:
+/***/ 610:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -6756,13 +6756,13 @@ function oldIEDetach(el, eventName, listener, useCapture) {
 module.exports = renderer;
 
 var eventify = __webpack_require__(22);
-var forceDirected = __webpack_require__(277);
-var svgGraphics = __webpack_require__(285);
-var windowEvents = __webpack_require__(612);
-var domInputManager = __webpack_require__(179);
-var timer = __webpack_require__(275);
-var getDimension = __webpack_require__(276);
-var dragndrop = __webpack_require__(180);
+var forceDirected = __webpack_require__(276);
+var svgGraphics = __webpack_require__(284);
+var windowEvents = __webpack_require__(611);
+var domInputManager = __webpack_require__(178);
+var timer = __webpack_require__(274);
+var getDimension = __webpack_require__(275);
+var dragndrop = __webpack_require__(179);
 
 /**
  * This is heart of the rendering. Class accepts graph to be rendered and rendering settings.
@@ -7230,10 +7230,10 @@ function renderer(graph, settings) {
 
 /***/ }),
 
-/***/ 612:
+/***/ 611:
 /***/ (function(module, exports, __webpack_require__) {
 
-var nullEvents = __webpack_require__(271);
+var nullEvents = __webpack_require__(270);
 
 module.exports = createDocumentEvents();
 
@@ -7260,7 +7260,7 @@ function off(eventName, handler) {
 
 /***/ }),
 
-/***/ 613:
+/***/ 612:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
