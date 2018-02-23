@@ -8,7 +8,8 @@ var config = {
     target: "web",
     entry: {
         "brush": [APP_DIR + '/brush.ts'],
-        "datasource": [APP_DIR + '/dataSource.ts']
+        "datasource": [APP_DIR + '/dataSource.ts'],
+        "spiral": [APP_DIR + '/spiral.ts']
     },
 
     output: {
