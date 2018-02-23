@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../dist/brush.dev.js"></script>
+    <script src="../dist/datasource.dev.js"></script>
+</head>
+<body>
+<div id="brush" style="width:600px;height:100px;"></div>
+
+
+<script>
+    window.onload = () => {
+        var {BlockchainInfoDataSource} = AG_datasource;
+        var {Brush} = AG_brush;
+
+        const ds = new BlockchainInfoDataSource({tickSize: 5});
+        new Brush({
+            context: '#brush',
+            dataSource: ds
+        })
+    }
+
+
+</script>
+
+</body>
+</html>
