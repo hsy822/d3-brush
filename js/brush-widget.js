@@ -1,11 +1,14 @@
 function BrushWidget(id, options){
 
+  d3.select('body')
+    .selectAll('p')
+
   //특정 영역 지정할 수 있도록
   var id = id.replace('#', '')
   document.getElementById(id).innerHTML = '<svg width="1200" height="100"></svg>'
 
-  //brushSizeSec
-  var brushSize = +options.brushSize
+  //brush 선택구간 사이즈
+  var brushSize = options.brushSizeSec
 
   //timeColumn(x축), dataColumn(y축)에 표시될 컬럼 지정 옵션
   var timeColumn = options.timeColumn,
@@ -46,7 +49,6 @@ function BrushWidget(id, options){
       //   return d[dataColumn]
       // })])
 
-
       g.append("g")
         .attr("class", "axis axis--x")
         .attr("transform", "translate(0," + height + ")")
@@ -71,6 +73,7 @@ function BrushWidget(id, options){
         .attr("height", function(d) {
           return height - y(d[dataColumn])
         })
+
       g.append("g")
         .attr("class", "brush")
         .call(brush)
@@ -78,22 +81,30 @@ function BrushWidget(id, options){
 
       g.on('click', function(){
         g.selectAll('line').remove()
+
+        var position = d3.mouse(this)
+
+        var barWidth = g.select('.bar').style('width')
+
+        barWidth = barWidth.replace(/[a-z]/gi,"")
+
+        g.select('.brush')
+          .call(brush.move, [position[0]-(barWidth*(brushSize/timeInfo.barDataSec)), position[0]])
+
       })
   })
 
   function selectRange(from, to){
       g.selectAll('line').remove()
 
-      g.append("g")
-      .attr("class", "brush").append("line")
+      g.select('.brush')
+      .append("line")
       .attr("x1", from)
       .attr("y1", 0)
       .attr("x2", from)
       .attr("y2", height)
       .style("stroke-width", 3)
       .style("stroke", "red")
-      .style("fill", "none");
-      // .call(brush.move, x.range())
 
     var t = d3.transition()
         .duration(2000)
@@ -102,6 +113,8 @@ function BrushWidget(id, options){
     d3.selectAll("line").transition(t)
       .attr("x1", to)
       .attr("x2", to)
+
+    console.log(d3.selectAll("line"))
   }
 
   function dataSet(data, timeInfo){
@@ -113,6 +126,7 @@ function BrushWidget(id, options){
     var barDataSec = parseInt(timeInfo['barDataSec']),
         allDataSec = parseInt(timeInfo['allDataSec'])
 
+    //전체 데이터에서 현재시각과 allDataSec기준으로 데이터를 가공한다.
     for(var i=0; i<data.length; i++){
 
       // 현재 시각 기준으로 x축 시간 단위를 나누는데, 현재는 데이터가 과거 데이터이기 때문에 임시 처리
@@ -127,6 +141,9 @@ function BrushWidget(id, options){
 
     var dataSec = []
 
+    // allDataSec 기준으로 가공된 데이터를 barDataSec 단위의 데이터로 가공하기 위해
+    // allDataSec/barDataSec 만큼의 객체를 만들고,
+    // 현재 시각 기준으로 하여 5초 단위에서 시간값을 올림하여 최초값을 구하고, 그 값에서 5초씩 줄어드는 값을 각 객체에 저장한다.
     for (var i=0; i<allDataSec/barDataSec; i++) {
       var dataObj = {}
       dataObj[timeColumn] = Math.ceil( currentTimestamp/barDataSec ) * barDataSec
@@ -139,7 +156,8 @@ function BrushWidget(id, options){
     }
 
     var idx = 0
-
+    // allDataSec 기준으로 가공된 데이터의 timeColumn과 위에서 정한 시간 값들을 비교하며,
+    // 해당 시간에 포함되는 객체에 가공된 데이터의 dataColumn을 더한값을 sum에 더한 횟수를 count에 저장하여 합의 평균을 구한다.
     for(var i=0; i<dataMin.length; i++){
 
       for(var j=0; j<dataSec.length; j++){
@@ -154,14 +172,22 @@ function BrushWidget(id, options){
 
     }
 
-    Array.from(dataSec).forEach((el)=>{
-      if(el.count != 0){
-        el[dataColumn] = el.sum/el.count
+    // 트랜젝션이 없는 경우 이전 값을 가져오는 로직 수정 필요
+    for(var i=0; i<dataSec.length; i++){
+      if(dataSec[i].count != 0){
+        dataSec[i][dataColumn] = dataSec[i].sum/dataSec[i].count
       }else{
-        el[dataColumn] = 0
+        dataSec[i][dataColumn] = dataSec[i-1][dataColumn]
       }
-    })
+    }
 
+    // Array.from(dataSec).forEach((el)=>{
+    //   if(el.count != 0){
+    //     el[dataColumn] = el.sum/el.count
+    //   }else{
+    //     el[dataColumn] = 0
+    //   }
+    // })
 
     return dataSec
   }
@@ -182,7 +208,7 @@ function BrushWidget(id, options){
     //   d1[0] = d3.timeSecond.floor(d0[0])
     //   d1[1] = d3.timeSecond.offset(d1[0])
     // }
-    console.log(d3.event.selection[0], d3.event.selection[1])
+    // console.log(d3.event.selection[0], d3.event.selection[1])
     var selection = chooseSelection(d3.event.selection[0], d3.event.selection[1])
 
     var tr, tdDate, txtDate, tdPrice, txtPrice
