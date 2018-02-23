@@ -20,7 +20,7 @@ var config = {
     },
 
     resolve: {
-        extensions: ['.js', '.ts']
+        extensions: ['.js', '.ts', '.coffee']
     },
 
     module: {
@@ -29,6 +29,11 @@ var config = {
                 test: /\.ts$/,
                 exclude: /node_modules/,
                 loader: 'awesome-typescript-loader'
+            },
+            {
+                test: /\.coffee/,
+                exclude: /node_modules/,
+                loader: 'coffee-loader'
             }
         ]
     },

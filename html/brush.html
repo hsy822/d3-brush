@@ -7,21 +7,38 @@
     <script src="../dist/datasource.dev.js"></script>
 </head>
 <body>
-<div id="brush" style="width:600px;height:100px;"></div>
+
+<button id="goBtn">go</button>
+<button id="stopBtn">stop</button>
+
+<div id="brush" style="position:absolute;bottom:10px;left:10px;right:10px;height:100px;"></div>
 
 
 <script>
+    let brush;
+
+
     window.onload = () => {
         var {BlockchainInfoDataSource} = AG_datasource;
         var {Brush} = AG_brush;
 
         const ds = new BlockchainInfoDataSource({tickSize: 5});
-        new Brush({
+        brush = new Brush({
             context: '#brush',
             dataSource: ds
         })
     }
 
+
+    document.getElementById('goBtn').addEventListener('click',()=>{
+        console.log('go')
+        brush.changeRefreshMode('auto')
+    });
+
+    document.getElementById('stopBtn').addEventListener('click',()=>{
+        console.log('stop')
+        brush.changeRefreshMode('manual')
+    });
 
 </script>
 
