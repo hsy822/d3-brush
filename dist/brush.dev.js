@@ -16412,7 +16412,7 @@ class Brush {
         this.xAxis = d3.axisBottom(this.xScale);
         this.xAxisG = this.svg.append('g').attr("transform", `translate(0,${this.height - 20})`);
         this.option.dataSource.subscribe((data) => {
-            // console.log(data)
+            console.log(data);
         });
         // this.startXisAnimation();
     }

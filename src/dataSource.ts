@@ -12,7 +12,7 @@ const toJson = JSON.parse
 const pick = attrName => obj => obj[attrName]
 const log = tag => d => { console.log(`[${tag}]`,d); return d; }
 
-export interface IDataSource {
+interface IDataSource {
     getWholeData: (from: Date, to: Date )=>Rows
     subscribe: (handler: SubscribeHandle)=>UnsubscribeHandle
 }
@@ -72,8 +72,11 @@ export class BlockchainInfoDataSource implements IDataSource {
         };
 
         this.ws$ = mws.fromWebSocket(ws, ws.close.bind(ws))
+            // .map(d=>{console.log(d); return d})
             .map(pick("data"))
+            // .map(log('data attribute'))
             .map(toJson)
+            // .map(log('toJson'))
             .map(pick("x"))
             .map(d=>{
                 d.timeGrp = Math.floor(d.time / this.option.tickSize)
@@ -88,7 +91,9 @@ export class BlockchainInfoDataSource implements IDataSource {
                     return {seed:{timeGrp:v.timeGrp, datas:[v]}, value: memo.datas}
                 }
             },{timeGrp: Math.floor(Date.now()/(this.option.tickSize*1000)), datas: []})
+            // .map(log('after grouping'))
             .filter(v=> v != null)
+            // .map(log('after grouping2'))
             .map(v=>{
                 return d3_nest().key(d=>d.timeGrp).rollup(leaves=>{
                     const sizeSum = leaves.reduce((m,v)=>{return m+v.size},0)
@@ -96,6 +101,7 @@ export class BlockchainInfoDataSource implements IDataSource {
                     return sizeSum / leaves.length
                 }).entries(v)
             })
+            // .map(log('avg'))
             .map((v)=>{
                 for(var k in this.subscribeHandles) {
                     this.subscribeHandles[k]( v );

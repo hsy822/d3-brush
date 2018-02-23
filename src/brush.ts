@@ -1,4 +1,4 @@
-import {IDataSource, RandomDataSource} from "./dataSource"
+import { RandomDataSource} from "./dataSource"
 import * as template from "lodash.template"
 import * as d3 from 'd3'
 
@@ -58,7 +58,7 @@ export class Brush {
         this.xAxisG = this.svg.append('g').attr("transform", `translate(0,${this.height-20})`);
 
         this.option.dataSource.subscribe((data)=>{
-            // console.log(data)
+            console.log(data)
         });
 
         // this.startXisAnimation();
