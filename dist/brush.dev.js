@@ -16425,6 +16425,7 @@ class Brush {
         //현재 시간 기준으로 x축 스케일 만든다.
         var arr = [];
         var barCount = (this.option.wholeTimeRange * 60) / this.option.barRange;
+        console.log(barCount);
         for (var i = 0; i < barCount; i++) {
             arr.push(now);
             now = now - (this.option.barRange * 1000);
@@ -16444,7 +16445,7 @@ class Brush {
             d3.max(dataSet, function (d) { return d['value']; })]);
         this.yScale = y;
         // bar그래프로 표시한다.
-        var g = this.svg.append('g').attr('class', 'barChart').attr("transform", `translate(-20, -20)`);
+        var g = this.svg.append('g').attr('class', 'barChart').attr("transform", `translate(0, -20)`);
         var t = this;
         g.selectAll(".bar")
             .data(dataSet)
