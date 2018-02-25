@@ -115,13 +115,14 @@ export class BlockchainInfoDataSource implements IDataSource {
     }
 
     getWholeData(from: Date, to: Date): Rows {
+
       //현재 시간 기준의 임시 데이터 생성 후 리턴
       var data = []
       var key = Math.floor(Date.now()/(this.option.tickSize*1000))
 
       console.log('data key', key)
       for (var i=0; i<60; i++) {
-        var value = Math.floor( (Math.random() * (1000 - 200 + 1)) + 200 )
+        var value = Math.floor( (Math.random() * (800 - 200 + 1)) + 200 )
         var obj = {
           key: key,
           value: value

@@ -5789,7 +5789,7 @@ class BlockchainInfoDataSource {
         var key = Math.floor(Date.now() / (this.option.tickSize * 1000));
         console.log('data key', key);
         for (var i = 0; i < 60; i++) {
-            var value = Math.floor((Math.random() * (1000 - 200 + 1)) + 200);
+            var value = Math.floor((Math.random() * (800 - 200 + 1)) + 200);
             var obj = {
                 key: key,
                 value: value
